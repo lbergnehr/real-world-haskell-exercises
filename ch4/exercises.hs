@@ -1,3 +1,5 @@
+import Data.Char (digitToInt)
+
 -- 1.
 -- Safe head
 safeHead :: [a] -> Maybe a
@@ -40,4 +42,14 @@ splitWith f xs =
 -- lr
 -- ll
 -- od
--- 
+
+-- 2.1.
+asInt_fold :: String -> Int
+asInt_fold []                         = error "No digits entered"
+asInt_fold ['-']                      = error "No digits entered"
+asInt_fold ('-':str)                  = negate $ asInt_fold str
+asInt_fold str       | '.' `elem` str = error "Only integers allowed"
+                     | otherwise      = foldl ((+) . (*10)) 0 (map digitToInt str)
+
+-- 2.2.
+
