@@ -34,14 +34,11 @@ splitWith f xs =
 -- 3. See exercise_3.hs
 
 -- 4. Transpose
--- hello
--- world
--- 
--- hw
--- eo
--- lr
--- ll
--- od
+transpose :: [String] -> [String]
+transpose [] = []
+transpose ls = headCol : transpose nonEmptyTailCols
+  where headCol          = map head ls
+        nonEmptyTailCols = filter (not . null) (map tail ls)
 
 -- 2.1.
 asInt_fold :: String -> Int
@@ -52,4 +49,8 @@ asInt_fold str       | '.' `elem` str = error "Only integers allowed"
                      | otherwise      = foldl ((+) . (*10)) 0 (map digitToInt str)
 
 -- 2.2.
+-- 2.3.
+concat' :: [[a]] -> [a]
+concat' lst = foldr step [] lst
+  where step xs res = xs ++ res
 
