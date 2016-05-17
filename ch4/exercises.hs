@@ -54,3 +54,12 @@ concat' :: [[a]] -> [a]
 concat' lst = foldr step [] lst
   where step xs res = xs ++ res
 
+-- 2.4.
+takeWhile_expl :: (a -> Bool) -> [a] -> [a]
+takeWhile_expl _ [] = []
+takeWhile_expl f (x:xs) | f x       = x : takeWhile_expl f xs
+                        | otherwise = []
+
+takeWhile_foldr :: (a -> Bool) -> [a] -> [a]
+takeWhile_foldr f = foldr step []
+  where step x xs = if f x then x : xs else []
